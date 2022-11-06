@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Register = () => {
+  const {createUser,userProfileupdate}=useContext(AuthContext)
     const handleSubmit =(event)=>{
         event.preventDefault()
         const form =event.target
         const name =form.name.value
         const email =form.email.value
         const password =form.password.value
-        console.log(name,email,password);
+        // console.log(name,email,password);
+
+        createUser(email,password)
+        .then(result =>{
+          const user=result.user
+          console.log(user);
+          form.reset();
+          handleUpdateUserName(name)
+        })
+        .catch(err =>{
+          console.log(err);
+        })
     }
 
+    const handleUpdateUserName=name=>{
+      userProfileupdate(name)
+      .then(()=>{
+
+      })
+      .catch(err =>{
+        console.log(err);
+      })
+    }
     return (
         <div>
             <div className="hero">

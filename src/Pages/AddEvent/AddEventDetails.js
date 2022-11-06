@@ -24,7 +24,7 @@ const AddEventDetails = () => {
            .then(res => res.json())
            .then(data => {
              console.log(data);
-             if(data.deletedCount > 1){
+             if(data.deletedCount > 0){
                 alert('Deleted successful')
                  const remaining=userUpdate.filter(user => user._id !== _id)
                  setUserUpdate(remaining)

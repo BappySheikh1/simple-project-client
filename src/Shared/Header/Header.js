@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../Contexts/AuthProvider';
 import logo from '../../assets/Group 1329.png'
+import { AuthContext } from '../../Contexts/AuthProvider';
+import {  toast } from 'react-toastify';
 
 const Header = () => {
     
-        const {user,logOutUser}=useContext(AuthContext)
+        const {user,userLogOut}=useContext(AuthContext)
         
        const handleLogOut=()=>{
-        logOutUser()
+        userLogOut()
         .then(()=> {
-         
+         toast.success('user log out successfully',{autoClose: 500})
          })
          .catch(err=> console.log(err))
        }
