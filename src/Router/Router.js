@@ -5,6 +5,7 @@ import AddEventDetails from "../Pages/AddEvent/AddEventDetails";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
+import PrivateRoute from "./PrivateRoute";
 
 export const router =createBrowserRouter([
     {
@@ -26,13 +27,13 @@ export const router =createBrowserRouter([
             },
             {
               path:'/event',
-              element: <AddEventDetails />
+              element: <PrivateRoute><AddEventDetails /></PrivateRoute>
               
             },
             {
                 path:'/event/:id',
                 loader:({params})=>fetch(`http://localhost:5000/users/${params.id}`),
-                 element: <AddEvent />
+                 element: <PrivateRoute><AddEvent /></PrivateRoute>
             }
    
         ]

@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UpdateUserCard from './UpdateUserCard';
+import { AuthContext } from '../../Contexts/AuthProvider';
 
 const AddEventDetails = () => {
-   const [userUpdate,setUserUpdate]=useState([])
-    
+    const {user,userLogOut}=useContext(AuthContext) ;
+   const [userUpdate,setUserUpdate]=useState([]);
+
     useEffect(()=>{
-        fetch('http://localhost:5000/usersPost')
-        .then(res => res.json())
+        fetch(`http://localhost:5000/usersPost?email=${user?.email}`,{
+            headers:{
+                authorization: `Bearer ${localStorage.getItem('tokenSimple')}`
+            }
+        })
+        .then(res =>{
+            if(res.status === 401 || res.status === 403){
+               userLogOut()
+            }
+            return res.json()
+        })
         .then(data => {
             setUserUpdate(data)
         })
-    },[])
+    },[user?.email,userLogOut])
 
     const handleDetele=(_id)=>{
         const agree =window.confirm('Are you sure this Product is deleted',_id)

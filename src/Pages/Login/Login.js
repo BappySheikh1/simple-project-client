@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Login = () => {
  
   const {logInUser}=useContext(AuthContext)
+   const navigate =useNavigate()
+   const location =useLocation()
+   let from = location.state?.from?.pathname || "/";
 
     const handleSubmit =(event)=>{
         event.preventDefault()
@@ -16,6 +20,24 @@ const Login = () => {
           const user=result.user
           console.log(user);
           form.reset();
+          const userInfo={
+            email: user.email
+          }
+          fetch('http://localhost:5000/jwt',{
+          method:"POST" ,
+          headers:{
+             "Content-type":'application/json'
+           },
+           body: JSON.stringify(userInfo)
+           
+          })
+          .then(res => res.json())
+          .then(data =>{
+            console.log(data);
+            localStorage.setItem('tokenSimple',data.token);
+            navigate(from,{replace: true })
+          })
+        
         })
         .catch(err =>{
           console.log(err);

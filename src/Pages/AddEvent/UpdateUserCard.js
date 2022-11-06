@@ -21,7 +21,7 @@ const UpdateUserCard = ({update,handleDetele}) => {
              <div className="card-body">
                <h2 className="card-title">Title: {title}</h2>
                 <p>Description: {description}</p>
-            <div className="card-actions justify-end">
+             <div className="card-actions justify-end">
              <button className="btn btn-warning font-bold" onClick={()=>handleDetele(_id)}>Delete</button>
             </div>
          </div>
