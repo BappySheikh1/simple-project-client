@@ -1,0 +1,19 @@
+.pagination{
+ text-align: center;
+}
+.pagination button{
+    margin-right: 10px;
+    cursor: pointer;
+    margin-bottom: 50px;
+    font-size: 30px;
+    border: 1px solid lightgray;
+    padding:10px 30px ;
+    border-radius: 50%;
+    color: black;
+    font-weight: 700;
+}
+.selected{
+   background-color: rgb(247, 112, 153);
+   border: gold;
+
+}
